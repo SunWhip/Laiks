@@ -1,15 +1,49 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informācijas Lejupielāde</title>
+</head>
+<body>
+
+<h2>Aprēķināt cik daudz informācijas var lejuplādēt sekundēs</h2>
+
+<form id="downloadForm">
+  <label for="downloadTime">Lejupielādes laiks (sekundēs, ja interneta ātrums ir 25 MB/s:</label>
+  <input type="number" id="downloadTime" name="downloadTime" required><br><br>
+
+  <label for="outputType">Izvēlieties atbildes tipu:</label>
+  <select id="outputType">
+    <option value="KB">KB</option>
+    <option value="KiB">KiB</option>
+  </select><br><br>
+
+  <button type="button" onclick="calculateDownload()">Aprēķināt</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+function calculateDownload() {
+  var time = parseFloat(document.getElementById("downloadTime").value);
+  var speedMB = 25; // Ātrums fiksēts uz 25 MB/s
+  var outputType = document.getElementById("outputType").value;
+
+  var downloadAmountMB = speedMB * time; // Lejupielādējamā datu apjoms megabaitos
+  var downloadAmountKB = downloadAmountMB * 1024; // Lejupielādējamā datu apjoms kilobaitos
+  var downloadAmountKiB = downloadAmountKB * 1024; // Lejupielādējamā datu apjoms kibibaitos
+
+  var result;
+  if (outputType === "KB") {
+    result = downloadAmountKB + " KB";
+  } else {
+    result = downloadAmountKiB + " KiB";
+  }
+
+  document.getElementById("result").innerHTML = "Lejupielādējamā datu daudzums: " + result;
+}
+</script>
+
+</body>
 </html>
